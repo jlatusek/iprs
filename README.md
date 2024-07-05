@@ -1,3 +1,15 @@
+# How to run 
+
+```bash
+    cd <project_root>
+    virtualenv .venv
+    source .venv/bin/activate
+    pip install -r requirements.txt
+    export PYTHONPATH=$(pwd)
+    python <python_script>
+
+```
+
 # What is IPRS?
 
 Intelligent Processing of Radar Signal ( ab. IPRS), is an outstanding tool for processing radar signals, which is written in python.
