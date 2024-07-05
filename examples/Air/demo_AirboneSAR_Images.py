@@ -29,11 +29,9 @@ sarplat.params = {'GeometryMode': 'SG'}
 sarplat.params = None
 
 ROI = {
-    'SubSceneArea': None,  # SceneArea
-    # 'SubSceneArea': [0.5, 0.5, 0.5, 0.5],  # SceneArea/2.0
-    'SubEchoSize': None,  # EchoSize
-    # 'SubEchoSize': [1. / 2, 1. / 2],  # 256x256
-    # 'SubEchoSize': [1. / 4, 1. / 4],  # 128x128
+    "SubSceneArea": [0.5, 0.5, 0.5, 0.5],  # SceneArea/2.0
+    "SubEchoAnchor": [3000, 6000],  # Airport
+    "SubEchoSize": [1, 1],  # 256x256
 }
 sarplat.selection = ROI
 sarplat.printsp()
