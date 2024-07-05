@@ -477,8 +477,8 @@ class SarPlat(object):
         # SubBe = compute_range_beamwidth(SubNr, Fsr, H, SubAd, Tp)
 
         SubTa = SubNa * Tsa
-        taSub = np.linspace(-SubTa / 2.0, SubTa / 2.0, SubNa)
-        faSub = np.linspace(-Fsa / 2.0, Fsa / 2.0, SubNa)
+        taSub = np.linspace(-SubTa / 2.0, SubTa / 2.0, int(SubNa))
+        faSub = np.linspace(-Fsa / 2.0, Fsa / 2.0, int(SubNa))
 
         SubRsc = 0.5 * np.sqrt(2. * SubRfar**2 + 2. * SubRnear**2 - SubFPr**2 + EPS)
         SubRs0 = SubRsc * np.cos(Ar)
@@ -525,11 +525,11 @@ class SarPlat(object):
             Yc = SubSC[1]
             SubR0 = SubRs0
             t0Sub = 2 * SubRsc / C
-            trSub = np.linspace(tstartSub, tendSub, SubNr)
+            trSub = np.linspace(tstartSub, tendSub, int(SubNr))
             # trSub = np.linspace(-SubTr / 2.0, SubTr / 2.0, SubNr) + t0Sub
             xminSub, xmaxSub, yminSub, ymaxSub = np.array(SubSA) + np.array([Xc, Xc, Yc, Yc])
 
-        frSub = np.linspace(-Fsr / 2.0, Fsr / 2.0, SubNr)
+        frSub = np.linspace(-Fsr / 2.0, Fsr / 2.0, int(SubNr))
 
         SubKa = (-2.0 * Vr**2 * np.cos(Ar)**3) / (Wl * SubRnear)
         SubLsar = Wl * SubRnear / La
