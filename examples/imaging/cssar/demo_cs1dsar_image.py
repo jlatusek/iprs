@@ -9,6 +9,10 @@ import sys
 import iprs
 import numpy as np
 import matplotlib.pyplot as plt
+import os
+
+file_path = os.path.realpath(__file__)
+PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(file_path), '../../..'))
 
 # ===SA: 128x128, S: 32x32
 sensor_name = 'DIY1'
@@ -54,16 +58,19 @@ cmap = 'gray'
 cmap = None
 cmap = 'jet'
 
-imgfilepath = '../../../data/img/points32.png'
-# imgfilepath = '../../../data/img/Lotus32.png'
-# imgfilepath = '../../../data/img/ship32.png'
-# imgfilepath = '../../../data/img/Lotus128.png'
-# imgfilepath = '../../../data/img/ship128.png'
-# imgfilepath = '../../../data/img/points128.png'
-imgfilepath = '../../../data/img/000043.png'
-imgfilepath = '../../../data/img/000010.png'
-imgfilepath = '../../../data/img/000237.png'
-imgfilepath = '../../../data/img/000066.png'
+# Get current script dir
+
+
+imgfilepath = f'{PROJECT_ROOT}/data/img/points32.png'
+# imgfilepath = f'{PROJECT_ROOT}/data/img/Lotus32.png'
+# imgfilepath = f'{PROJECT_ROOT}/data/img/ship32.png'
+# imgfilepath = f'{PROJECT_ROOT}/data/img/Lotus128.png'
+# imgfilepath = f'{PROJECT_ROOT}/data/img/ship128.png'
+# imgfilepath = f'{PROJECT_ROOT}/data/img/points128.png'
+imgfilepath = f'{PROJECT_ROOT}/data/img/000043.png'
+imgfilepath = f'{PROJECT_ROOT}/data/img/000010.png'
+imgfilepath = f'{PROJECT_ROOT}/data/img/000237.png'
+imgfilepath = f'{PROJECT_ROOT}/data/img/000066.png'
 
 
 optim = 'Lasso'
@@ -92,7 +99,7 @@ plt.show()
 
 print(Ssim.shape)
 
-fileA = '../../../data/model/' + 'sensor' + \
+fileA = f'{PROJECT_ROOT}/data/model/' + 'sensor' + \
     sensor_name + "acquis" + acquis_name + '.pkl'
 
 if isregen:
