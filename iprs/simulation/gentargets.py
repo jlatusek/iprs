@@ -229,7 +229,7 @@ def img2tgs(grayimg, bg=0, noise=None, TH=None, SA=None, gdshape=None):
 
     if np.ndim(grayimg) == 3:
         grayimg = np.mean(grayimg, axis=2)
-    if noise is 'awgn':
+    if noise == 'awgn':
         SNR = 3
         grayimg = matnoise(grayimg, noise='wgn', imp=1.0, SNR=SNR)
 

@@ -385,17 +385,17 @@ def load_data(datafile, way=0, which='all', normlize=False):
     datafile : {string}
         SAR data file path
     way : {number}, optional
-            if way is 1:  # [N Na Nr]
+            if way == 1:  # [N Na Nr]
         return X, I, sarplat
 
-        if way is 2: [2 N Na Nr]
+        if way == 2: [2 N Na Nr]
             return X, sarplat
 
-        if way is 3: [N 2 Na Nr]
+        if way == 3: [N 2 Na Nr]
             return X, sarplat
-        if way is 4: [N Na Nr 2]
+        if way == 4: [N Na Nr 2]
 
-        (the default is 0, which [default_description])
+        (the default == 0, which [default_description])
     which : {str}, optional
         'rawdata', 'image', 'all' --> rawdata and image
         (the default is 'all', which load rawdata and image)
@@ -417,7 +417,7 @@ def load_data(datafile, way=0, which='all', normlize=False):
 
     sardata, sarplat = iprs.sarread(datafile)
 
-    if way is 0:
+    if way == 0:
         return sardata, sarplat
 
     X = np.array(sardata.rawdata)  # [N Na Nr] complex
@@ -427,28 +427,28 @@ def load_data(datafile, way=0, which='all', normlize=False):
     if normlize:
         X = X / XmaxValue
 
-    if np.ndim(X) is 2:
+    if np.ndim(X) == 2:
         X = np.array([X])
         I = np.array([I])
     print(datafile, way, X.shape)
     N, Na, Nr = X.shape
-    if way is 1:  # [N Na Nr]
+    if way == 1:  # [N Na Nr]
         return X, I, sarplat
 
-    if way is 2:  # [2 N Na Nr]
+    if way == 2:  # [2 N Na Nr]
         X = np.array([X.real, X.imag])  # [2 N Na Nr]
         return X, sarplat
 
-    if way is 3:  # [N 2 Na Nr]
+    if way == 3:  # [N 2 Na Nr]
         X = np.array([X.real, X.imag])  # [2 N Na Nr]
         X = np.swapaxes(X, 0, 1)  # [N 2 Na Nr]
         return X, sarplat
-    if way is 4:  # [N Na Nr 2]
+    if way == 4:  # [N Na Nr 2]
         X = np.array([X.real, X.imag])  # [2 N Na Nr]
         X = X.transpose(1, 2, 3, 0)  # [N Na Nr 2]
 
         return X, sarplat, I, XmaxValue
-    # if way is 5:
+    # if way == 5:
 
 
 def format_data(X, modefrom='chnl_last', modeto='chnl_first'):
@@ -482,24 +482,24 @@ def format_data(X, modefrom='chnl_last', modeto='chnl_first'):
 
     if modefrom == modeto:
         return X
-    if np.ndim(X) is 4:
+    if np.ndim(X) == 4:
         s = 1
         m = 2
         e = 3
-    elif np.ndim(X) is 3:
+    elif np.ndim(X) == 3:
         s = 0
         m = 1
         e = 2
     else:
         raise TypeError("X should be a 3 or 4 dimention array!")
-    if modefrom is 'chnl_last':
-        if modeto is 'chnl_first':
+    if modefrom == 'chnl_last':
+        if modeto == 'chnl_first':
             X = np.swapaxes(X, s, e)  # N H W C --> N C W H
             X = np.swapaxes(X, m, e)  # N C W H --> N C H W
         else:
             raise ValueError("Unknown mode of: ", modeto)
-    elif modefrom is 'chnl_first':
-        if modeto is 'chnl_last':
+    elif modefrom == 'chnl_first':
+        if modeto == 'chnl_last':
             X = np.swapaxes(X, s, e)  # N C H W --> N W H C
             X = np.swapaxes(X, s, m)  # N W H C --> N H W C
     return X

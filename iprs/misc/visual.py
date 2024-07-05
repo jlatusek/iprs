@@ -323,7 +323,7 @@ def sarshow(SI, sarplat, maxp=None, axismod=None, title=None, cmap=None, aspect=
     if axismod is None:
         axismod = 'Image'
 
-    if axismod is 'Image':
+    if axismod == 'Image':
         [amax, rmax] = SI.shape
         extent = [1, rmax, 1, amax]
         xlabelstr = "Range"
@@ -446,7 +446,7 @@ def show_sarimage(SI, sarplat, axismod=None, title=None, cmap=None, isimgadj=Fal
     if axismod is None:
         axismod = 'Image'
 
-    if axismod is 'Image':
+    if axismod == 'Image':
         [amax, rmax] = SI.shape
         extent = [1, rmax, 1, amax]
         xlabelstr = "Range"
@@ -574,17 +574,17 @@ def show_sarimage3d(SI, sarplat, axismod=None, title=None, cmap=None, isimgadj=F
     if axismod is None:
         axismod = 'Image'
 
-    if axismod is 'Image':
+    if axismod == 'Image':
         [amax, rmax] = SI.shape
         extent = [1, rmax, amax, 1]
         xlabelstr = "Range"
         ylabelstr = "Azimuth"
-    elif axismod is 'SceneAbsolute':
+    elif axismod == 'SceneAbsolute':
         extent = [ymin, ymax, xmax, xmin]
         print(extent)
         xlabelstr = "Range (m)"
         ylabelstr = "Azimuth (m)"
-    elif axismod is 'SceneRelative':
+    elif axismod == 'SceneRelative':
         extent = [ymin - SC[1], ymax - SC[1], xmax - SC[0], xmin - SC[0]]
         xlabelstr = "Range (m)"
         ylabelstr = "Azimuth (m)"

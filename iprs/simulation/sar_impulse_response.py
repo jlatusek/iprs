@@ -150,11 +150,11 @@ def sarir(sarplat, mod='ar', ver=False):
 
     logging.info("---Done!")
     logging.info("---Out sar_impulse_response.")
-    if mod is 'a':
+    if mod == 'a':
         return ha
-    if mod is 'r':
+    if mod == 'r':
         return hr
-    if mod is 'ar':
+    if mod == 'ar':
         return ha * hr
 
 

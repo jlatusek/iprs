@@ -116,16 +116,16 @@ def awgn(sig, SNR=30, PEAK=1, pMode='db', measMode='measured'):
         raise TypeError("The input signal must have 2 or fewer dimensions.")
     # --- Check the signal power.
     # This needs to consider power measurements on matrices
-    if measMode is 'measured':
+    if measMode == 'measured':
         sigPower = np.sum((np.abs(sig.flatten())) ** 2) / sig.size
-        if pMode is 'db':
+        if pMode == 'db':
             sigPower = 10 * np.log10(sigPower)
 
     # print(sig.shape)
     # --- Compute the required noise power
-    if pMode is 'linear':
+    if pMode == 'linear':
         noisePower = sigPower / reqSNR
-    elif pMode is 'db':
+    elif pMode == 'db':
         noisePower = sigPower - reqSNR
         pMode = 'dbw'
 
@@ -169,18 +169,18 @@ def wgn(shape, p, PEAK=1, pMode='dbw', dtype='real', seed=None):
     """
 
     # print(shape)
-    if pMode is 'linear':
+    if pMode == 'linear':
         noisePower = p
-    elif pMode is 'dbw':
+    elif pMode == 'dbw':
         noisePower = 10 ** (p / 10)
-    elif pMode is 'dbm':
+    elif pMode == 'dbm':
         noisePower = 10 ** ((p - 30) / 10)
 
     # --- Generate the noise
     if seed is not None:
         np.random.seed(seed)
 
-    if dtype is 'complex':
+    if dtype == 'complex':
         y = (np.sqrt(PEAK * noisePower / 2)) * \
             (_func(shape) + 1j * _func(shape))
     else:

@@ -205,7 +205,7 @@ def img2echo(sarplat, grayimg, bg=0., TH=None, noise=None, SNR=30, h=None, verbo
 
     if np.ndim(grayimg) == 3:
         grayimg = np.mean(grayimg, axis=2)
-    if noise is 'awgn':
+    if noise == 'awgn':
         grayimg = matnoise(grayimg, noise='wgn', imp=1.0, SNR=SNR)
 
     if bg == 1.0:
@@ -323,12 +323,12 @@ def img2rawdata(sarplat, grayimg, bg=0, TH=None, noise=None, gdshape=None, mod='
     # SA = sarplat.acquisition['SceneArea']
     SA = sarplat.selection['SubSceneArea']
 
-    if mod is 'time':
+    if mod == 'time':
         targets = img2tgs(grayimg, bg=bg, noise=noise, TH=TH, SA=SA, gdshape=gdshape)
         logging.info('~~~There are total %d targets.' % len(targets))
         Sr, ta, tr = tgs2rawdata(sarplat, targets, noise=None, verbose=verbose)
 
-    if mod is 'freq':
+    if mod == 'freq':
         Sr, targets = img2echo(sarplat, grayimg, TH=None, noise=noise, verbose=verbose)
 
     logging.info('---Out img2rawdata.')

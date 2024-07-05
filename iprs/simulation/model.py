@@ -106,7 +106,7 @@ def sarmodel(sarplat, mod=None, gdshape=None, normrc=None, verbose=True):
     if mod is None:
         mod = '2D1'
 
-    if mod is '2D1':
+    if mod == '2D1':
         print((Na * Nr, gH * gW))
         NaNr = int(Na * Nr)
         gHgW = int(gH * gW)
@@ -125,12 +125,12 @@ def sarmodel(sarplat, mod=None, gdshape=None, normrc=None, verbose=True):
                 wa = np.sinc(yy / yFootPrint)
                 A[cnt, :] = wr * wa * np.exp(1j * PI * phase)
                 cnt = cnt + 1
-    if mod is '2D2':
+    if mod == '2D2':
         pass
     # if mod is '1Da':
     #         S     =   A      G
     #         MxW       MxH    HxW   (M:Na, N:Nr, M<<H)
-    if mod is '1Da':
+    if mod == '1Da':
         A = np.zeros((Na, gW), dtype='complex')
 
         # for m in range(Na):
@@ -150,7 +150,7 @@ def sarmodel(sarplat, mod=None, gdshape=None, normrc=None, verbose=True):
     # if mod is '1Dr':
     #         S'    =   A      G'
     #         NxH       NxW    WxH   (M:Na, N:Nr, N<<W)
-    if mod is '1Dr':
+    if mod == '1Dr':
         A = np.zeros((Nr, gY), dtype='complex')
 
     if verbose:
@@ -241,32 +241,32 @@ def load_sarmodel(datafile, mod='AinvA'):
         wrong mod
     """
     print("===reading model file: ", datafile, "...")
-    if datafile is not "":
+    if datafile != "":
         # get map
         f = open(datafile, 'rb')
         # for python2
         if sys.version_info < (3, 1):
-            if mod is 'A':
+            if mod == 'A':
                 A = pkl.load(f)
                 f.close()
                 return A
-            if mod is 'invA':
+            if mod == 'invA':
                 pkl.load(f)
                 invA = pkl.load(f)
                 f.close()
                 return invA
-            if mod is 'AinvA':
+            if mod == 'AinvA':
                 A = pkl.load(f)
                 invA = pkl.load(f)
                 f.close()
                 return A, invA
-            if mod is 'AAH':
+            if mod == 'AAH':
                 A = pkl.load(f)
                 pkl.load(f)
                 AH = pkl.load(f)
                 f.close()
                 return A, AH
-            if mod is 'AinvAAH':
+            if mod == 'AinvAAH':
                 A = pkl.load(f)
                 invA = pkl.load(f)
                 AH = pkl.load(f)
@@ -277,27 +277,27 @@ def load_sarmodel(datafile, mod='AinvA'):
 
         # for python3
         else:
-            if mod is 'A':
+            if mod == 'A':
                 A = pkl.load(f, encoding='latin1')
                 f.close()
                 return A
-            if mod is 'invA':
+            if mod == 'invA':
                 pkl.load(f, encoding='latin1')
                 invA = pkl.load(f, encoding='latin1')
                 f.close()
                 return invA
-            if mod is 'AinvA':
+            if mod == 'AinvA':
                 A = pkl.load(f, encoding='latin1')
                 invA = pkl.load(f, encoding='latin1')
                 f.close()
                 return A, invA
-            if mod is 'AAH':
+            if mod == 'AAH':
                 A = pkl.load(f, encoding='latin1')
                 pkl.load(f, encoding='latin1')
                 AH = pkl.load(f, encoding='latin1')
                 f.close()
                 return A, AH
-            if mod is 'AinvAAH':
+            if mod == 'AinvAAH':
                 A = pkl.load(f, encoding='latin1')
                 invA = pkl.load(f, encoding='latin1')
                 AH = pkl.load(f, encoding='latin1')
@@ -396,7 +396,7 @@ def sarmodel_genecho(A, g, mod=None, gdshape=None, verbose=True):
         dx = W / (gW * 1.0)
         dy = H / (gH * 1.0)
 
-    if mod is '2D1':
+    if mod == '2D1':
         g = transform.resize(g, (gH, gW), preserve_range=True)
         g = g.flatten()
         g = g / np.max(g)

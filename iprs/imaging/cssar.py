@@ -135,9 +135,9 @@ def cs1d_sar(s, A, D=None, axis=-1, norm=1, factor=0.1, optim='OMP', max_iter=10
         # sshape = s.shape
         s = s.flatten()
 
-    if norm is 2:
+    if norm == 2:
         # Reconstruction with L2 (Ridge) penalization
-        if optim is 'Ridge':
+        if optim == 'Ridge':
             if verbose:
                 print("===Do Ridge L2...")
             rgr_ridge = Ridge(alpha=factor, max_iter=max_iter, tol=tol)
@@ -148,8 +148,8 @@ def cs1d_sar(s, A, D=None, axis=-1, norm=1, factor=0.1, optim='OMP', max_iter=10
     # Reconstruction with L1 (Lasso) penalization
     # the best value of alpha was determined using cross validation
     # with LassoCV
-    if norm is 1:
-        if optim is 'Lasso':
+    if norm == 1:
+        if optim == 'Lasso':
             if verbose:
                 print("===Do Lasso L1...")
             rgr_lasso = Lasso(alpha=factor, max_iter=max_iter, tol=tol)
@@ -157,8 +157,8 @@ def cs1d_sar(s, A, D=None, axis=-1, norm=1, factor=0.1, optim='OMP', max_iter=10
             x = rgr_lasso.coef_
             if verbose:
                 print("===Done!")
-    if norm is 0:
-        if optim is 'OMP':
+    if norm == 0:
+        if optim == 'OMP':
             if verbose:
                 print("===Do OMP L0...")
             omp = OrthogonalMatchingPursuit(

@@ -154,13 +154,13 @@ def decfmtfceos(F, n, x, b, e='<'):
         'F': lambda: [float(b[i * x:(i + 1) * x]) for i in range(n)],
         'f': lambda: struct.unpack(e + str(n) + 'f', b),
         'C': lambda: [float(b[i * int(x / 2.):(i + 1) * int(x / 2)]) + 1j * float(b[i * x:(i + 1) * x]) for i in range(n)],
-        'B': lambda: [int.from_bytes(b[i * x:(i + 1) * x], byteorder=('big' if e is '>' else 'little'), signed=False) for i in range(n)],
+        'B': lambda: [int.from_bytes(b[i * x:(i + 1) * x], byteorder=('big' if e == '>' else 'little'), signed=False) for i in range(n)],
         'A': lambda: [struct.unpack(e + str(x) + 's', b[i * x:(i + 1) * x])[0].decode() for i in range(n)],
         'I': lambda: [getnumber(b[i * x:(i + 1) * x]) for i in range(n)],
         # 'I': lambda: [struct.unpack(e + str(x) + 's', b[i * x:(i + 1) * x])[0] for i in range(n)],
-        'IU': lambda: [int.from_bytes(b[i * x:(i + 1) * x], byteorder=('big' if e is '>' else 'little'), signed=False) for i in range(n)],
+        'IU': lambda: [int.from_bytes(b[i * x:(i + 1) * x], byteorder=('big' if e == '>' else 'little'), signed=False) for i in range(n)],
         # 'IU': lambda: [int(codecs.encode(b[i * x:(i + 1) * x], 'hex'), 16) for i in range(n)],
-        'IS': lambda: [int.from_bytes(b[i * x:(i + 1) * x], byteorder=('big' if e is '>' else 'little'), signed=True) for i in range(n)],
+        'IS': lambda: [int.from_bytes(b[i * x:(i + 1) * x], byteorder=('big' if e == '>' else 'little'), signed=True) for i in range(n)],
         # 'IS': lambda: [b2i(b[i * x:(i + 1) * x]) for i in range(n)],
     }.get(F, None)()
 
