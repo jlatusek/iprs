@@ -21,6 +21,7 @@ from skimage import filters
 import matplotlib.pyplot as plt
 
 from iprs.utils.image import imresize
+import iprs
 
 
 def tgs2rawdata(sarplat, targets, noise=None, SNR=None, verbose=False):
