@@ -46,8 +46,18 @@ sarplat.params = {
     "FPr": 1,
     "Lsar": 1,
     "FPa": 1,
+    "DX": 0.1,
+    "DY": 0.1,
+    "BWa": 1,
+    "tac": 0,
 }
-sarplat.selection = None
+
+ROI = {
+    "SubSceneArea": [1.0, 2.0, 1.0, 2.0],  # SceneArea/2.0
+    "SubEchoAnchor": [3000, 6000],  # Airport
+    "SubEchoSize": [5, 7],  # 256x256
+}
+sarplat.selection = ROI
 sarplat.printsp()
 
 
