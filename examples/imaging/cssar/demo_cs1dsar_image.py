@@ -11,24 +11,41 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # ===SA: 128x128, S: 32x32
-sensor_name = 'DIY8'
-acquis_name = 'DIY8'
-
-# ===SA: 32x32, S: 32x32
-# sensor_name = 'DIY7'
-# acquis_name = 'DIY9'
+sensor_name = 'DIY1'
+acquis_name = 'DIY1'
 
 sarplat = iprs.SarPlat()
 sarplat.name = "sensor=" + sensor_name + "_acquisition=" + acquis_name
-sarplat.sensor = iprs.SENSORS[sensor_name]
+sensor = iprs.SENSORS[sensor_name]
+
+PRF = sensor['PRF']
+Tp = sensor['Tp']
+Fsa = PRF
+Tsa = 1.0 / PRF
+Tsr = 5.1 * Tp
+Na = 2
+Nr = 1
+
+
+sarplat.sensor = sensor
 sarplat.acquisition = iprs.ACQUISITION[acquis_name]
+sarplat.params = {
+    "GeometryMode": "SG",
+    "Fsr": 32.317e6,
+    "Fsa": Fsa,
+    "Tsa": Tsa,
+    "Tsr": Tsr,
+    "Na": Na,
+    "Nr": Nr,
+    "Rnear": 1,
+    "Rfar": 1,
+    "FPr": 1,
+    "Lsar": 1,
+    "FPa": 1,
+}
 sarplat.selection = None
-sarplat.params = None
-sarplat.select()
 sarplat.printsp()
 
-Na = sarplat.params['Na']
-Nr = sarplat.params['Nr']
 
 isregen = False
 # isregen = True
