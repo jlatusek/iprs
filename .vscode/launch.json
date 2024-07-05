@@ -12,6 +12,16 @@
             "console": "integratedTerminal",
             "env": {
                 "PYTHONPATH": "${workspaceFolder}"
+            },
+        },
+        {
+            "name": "Demo air",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/examples/Air/demo_AirboneSAR_Images.py",
+            "console": "integratedTerminal",
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}"
             }
         }
     ]
