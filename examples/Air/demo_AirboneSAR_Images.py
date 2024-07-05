@@ -174,16 +174,16 @@ Sr = sardata.rawdata[:, :, 0] + sardata.rawdata[:, :, 1] * 1j
 # do RD imaging
 verbose = True
 
-if imagingMethod is 'RangeDoppler':
+if imagingMethod == 'RangeDoppler':
     # do RD imaging
     SrIr = iprs.rda_adv(Sr, sarplat, zpadar=zpadar, usesrc=usesrc,
                         usedpc=usedpc, rcmc=rcmc, verbose=verbose)
     # SrIr = iprs.rda(Sr, sarplat, usezpa=False,
     #                 usermc=False, verbose=verbose)
 
-elif imagingMethod is 'OmegaK':
+elif imagingMethod == 'OmegaK':
     SrIr, ta, tr = iprs.wka(Sr, sarplat, verbose=verbose)
-elif imagingMethod is 'ChirpScaling':
+elif imagingMethod == 'ChirpScaling':
     SrIr = iprs.csa_adv(Sr, sarplat, zpadar=zpadar, usesrc=False,
                         rcmc=rcmc, usedpc=usedpc, verbose=verbose)
     # SrIr = iprs.csa(Sr, sarplat, verbose=verbose)
