@@ -5,9 +5,13 @@
 # @Link    : http://iridescent.ink
 # @Version : $1.0$
 
+import os
 import iprs
 import numpy as np
 import matplotlib.pyplot as plt
+
+file_path = os.path.realpath(__file__)
+PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(file_path), '../..'))
 
 sensor_name = 'Air1'
 acquis_name = 'Air1'
@@ -40,7 +44,7 @@ SS = [int(SA[1] - SA[0]), int(SA[3] - SA[2])]
 Xc = SC[0]
 Yc = SC[1]
 
-outfolder = '../../data/sar/image/'
+outfolder = f'{PROJECT_ROOT}/data/sar/image/'
 datasetname = 'image'
 
 datasetname = 'points32'
@@ -56,7 +60,7 @@ datasetname = 'Lotus128'
 # datasetname = '000066'
 # datasetname = '000002AirPlane128'
 
-imgfilepath = '../../data/' + 'img/' + datasetname + '.png'
+imgfilepath = f'{PROJECT_ROOT}/data/' + 'img/' + datasetname + '.png'
 
 imagingMethod = 'RangeDoppler'
 # imagingMethod = 'OmegaK'
