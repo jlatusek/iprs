@@ -8,6 +8,7 @@ from __future__ import division, print_function, absolute_import
 import numpy as np
 
 import logging
+import iprs
 from iprs.utils.const import *
 from iprs.utils.io import savemat, loadmat
 from iprs.misc import visual as vis

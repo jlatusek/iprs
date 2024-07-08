@@ -10,16 +10,18 @@ import numpy as np
 
 sensor_name = 'RADARSAT1'
 acquis_name = 'RADARSAT1'
-sensor_name = 'SIMSARv1a'
-acquis_name = 'SIMSARv1a'
-sensor_name = 'DIY1'
-acquis_name = 'DIY1'
+#sensor_name = 'SIMSARv1a'
+#acquis_name = 'SIMSARv1a'
+#sensor_name = 'DIY1'
+#acquis_name = 'DIY1'
 
 sarplat = iprs.SarPlat()
 sarplat.name = "sensor=" + sensor_name + "_acquisition=" + acquis_name
 sarplat.sensor = iprs.SENSORS[sensor_name]
 sarplat.acquisition = iprs.ACQUISITION[acquis_name]
+sarplat.params = {'GeometryMode': 'SG'}
 sarplat.params = None
+sarplat.selection = None
 sarplat.printsp()
 
 SC = sarplat.acquisition['SceneCenter']
@@ -55,7 +57,11 @@ targets = [
 
 
 imgshape = (128, 128)
-imgshape = (SA[3] - SA[2], SA[1] - SA[0])
+#imgshape = (SA[3] - SA[2], SA[1] - SA[0])
+
+SS = [int(SA[3] - SA[1]), int(SA[1] - SA[0])]
+imgshape = SS
+
 
 SrI = iprs.show_targets(targets, SA, imgshape)
 
@@ -63,8 +69,7 @@ Sr, ta, tr = iprs.tgs2rawdata(sarplat, targets, verbose=True)
 
 print(Sr.shape)
 # visualize
-iprs.show_amplitude_phase(Sr)
-
+#iprs.show_amplitude_phase(Sr)
 
 # store
 sardata = iprs.SarData()
@@ -83,13 +88,26 @@ sardata.image = SrI
 # --------------------------------------------
 # do RD imaging
 verbose = True
+verbose = False
+
+#ftshift = True
+ftshift = False
+#zpadar = (256, 256)
+zpadar = False
+zpadar = True
+# zpadar = None
+usesrc = True
+# usesrc = False
+usedpc = True
+# usedpc = False
+rcmc = False
+rcmc = 4
 
 if imagingMethod is 'RangeDoppler':
     # do RD imaging
-    # SrIr, ta, tr = iprs.rda(Sr, sarplat, verbose=False)
-    SrIr = iprs.rda_adv(
-        Sr, sarplat, usezpa=True, usesrc=True, usermc=False, verbose=True)
-
+    # SrIr = iprs.rda_adv(Sr, sarplat, zpadar=zpadar,
+    #                     usesrc=usesrc, usedpc=usedpc, rcmc=rcmc, verbose=verbose)
+    SrIr = iprs.rda(Sr, sarplat, zpadar=zpadar, rcmc=rcmc, verbose=verbose)
 elif imagingMethod is 'OmegaK':
     SrIr, ta, tr = iprs.wka(Sr, sarplat, verbose=verbose)
 elif imagingMethod is 'ChirpScaling':
